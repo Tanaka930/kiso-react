@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ColorfulMessage from "./compornents/ColorfulMessage";
 
 const App = () => {
+  console.log("さいしょ");
   const [num, setNum] = useState(0);
-  const [faceShowFlag, setfaceShowFlag] = useState(true);
+  const [faceShowFlag, setfaceShowFlag] = useState(false);
 
   const onClickCountUp = () => {
     setNum(num + 1);
@@ -11,6 +12,17 @@ const App = () => {
   const onClickSwitchShowFlag = () => {
     setfaceShowFlag(!faceShowFlag);
   };
+
+  useEffect(() => {
+    if (num > 0) {
+      if (num % 3 === 0) {
+        faceShowFlag || setfaceShowFlag(true);
+      } else {
+        faceShowFlag && setfaceShowFlag(false);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [num]);
 
   return (
     <>
